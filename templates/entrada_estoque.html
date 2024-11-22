@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada no Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+    <h1>Registrar Entrada no Estoque</h1>
+
+    
+
+    <!-- Formulário de Entrada -->
+    <form method="POST" action="{{ url_for('entrada_estoque') }}">
+        <label for="produto_id">Produto:</label>
+        <select name="produto_id" id="produto_id" required class="custom-dropdown">
+            {% for produto in produtos %}
+                <option value="{{ produto.id }}">{{ produto.nome }} ({{ produto.codigo }})</option>
+            {% endfor %}
+        </select>        
+        <br><br>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade" min="1" required>
+        <br><br>
+
+        <button type="submit" class="btn adicionar-produto-btn">Registrar Entrada</button>
+    </form>
+
+    <br><br>
+    <a href="{{ url_for('estoque') }}" class="link-back">Voltar ao Estoque</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/produtos">Produtos</a>
+            <a href="/estoque">Estoque</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Lista de Produtos</h1>
+
+        <!-- Botão para Adicionar Produto -->
+        <form action="{{ url_for('adicionar_produto') }}" method="post">
+            <button type="submit" class="btn adicionar-produto-btn">Adicionar Produto</button>
+        </form>        
+
+        <!-- Tabela com os Produtos -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Localização</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.codigo }}</td>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.marca }}</td>
+                    <td>{{ produto.categoria }}</td>
+                    <td>{{ produto.quantidade }}</td>
+                    <td>R$ {{ '%.2f' % produto.preco }}</td>  <!-- Formata o preço com 2 casas decimais e o cifrão -->
+                    <td>{{ produto.localizacao }}</td>
+                    <td>
+                        <!-- Link para Editar Produto -->
+                        <a href="{{ url_for('editar_produto', id=produto.id) }}" class="btn editar-btn">Editar</a>
+
+                        <!-- Formulário para Remover Produto -->
+                        <form action="{{ url_for('remover_produto', id=produto.id) }}" method="POST" style="display:inline;" onsubmit="return confirmarRemocao();">
+                            <button type="submit" class="btn remover-btn">Remover</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

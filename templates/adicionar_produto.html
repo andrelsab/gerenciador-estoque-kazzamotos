@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Produto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main>
+        <h1>Adicionar Novo Produto</h1>
+
+       
+
+        <!-- Formulário de Adicionar Produto -->
+        <form method="POST" action="{{ url_for('adicionar_produto') }}" class="form-container">
+            {{ form.hidden_tag() }}
+            
+            <div class="form-group">
+                <label for="codigo">Código:</label>
+                {{ form.codigo }}
+            </div>
+
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                {{ form.nome }}
+            </div>
+
+            <div class="form-group">
+                <label for="marca">Marca:</label>
+                {{ form.marca }}
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria:</label>
+                {{ form.categoria }}
+            </div>
+
+            <div class="form-group">
+                <label for="quantidade">Quantidade:</label>
+                {{ form.quantidade }}
+            </div>
+
+            <div class="form-group">
+                <label for="preco">Preço:</label>
+                {{ form.preco }}
+            </div>
+
+            <div class="form-group">
+                <label for="localizacao">Localização:</label>
+                {{ form.localizacao }}
+            </div>
+
+            <button type="submit" class="btn adicionar-produto-btn">Adicionar Produto</button>
+        </form>
+
+        <a href="{{ url_for('listar_produtos') }}" class="link-back">Voltar à lista de produtos</a>
+    </main>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/produtos">Produtos</a>
+            <a href="/estoque">Estoque</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Editar Produto</h1>
+
+        <form action="{{ url_for('editar_produto', id=produto.id) }}" method="post">
+            {{ form.hidden_tag() }}
+
+            <div>
+                <label for="codigo">Código</label>
+                {{ form.codigo(class="form-control") }}
+            </div>
+            <div>
+                <label for="nome">Nome</label>
+                {{ form.nome(class="form-control") }}
+            </div>
+            <div>
+                <label for="marca">Marca</label>
+                {{ form.marca(class="form-control") }}
+            </div>
+            <div>
+                <label for="categoria">Categoria</label>
+                {{ form.categoria(class="form-control") }}
+            </div>
+            <div>
+                <label for="quantidade">Quantidade</label>
+                {{ form.quantidade(class="form-control") }}
+            </div>
+            <div>
+                <label for="preco">Preço</label>
+                {{ form.preco(class="form-control") }}
+            </div>
+            <div>
+                <label for="localizacao">Localização</label>
+                {{ form.localizacao(class="form-control") }}
+            </div>
+
+            <button type="submit" class="btn atualizar-produto-btn">Atualizar Produto</button>
+        </form>
+
+        <a href="{{ url_for('listar_produtos') }}" class="link-back">Voltar à lista de produtos</a>
+    </main>
+</body>
+</html>
