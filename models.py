@@ -1,8 +1,18 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import pytz  # Para gerenciar fusos horários
 
 # Inicializa o objeto de banco de dados
 db = SQLAlchemy()
+
+# Configuração do fuso horário brasileiro
+BRASILIA_TZ = pytz.timezone("America/Sao_Paulo")
+
+
+def get_brasilia_time():
+    """Retorna o horário atual no fuso horário de Brasília."""
+    return datetime.now(BRASILIA_TZ)
+
 
 # Modelo Produto
 class Produto(db.Model):
@@ -18,8 +28,8 @@ class Produto(db.Model):
     quantidade = db.Column(db.Integer, nullable=False)  # Quantidade em estoque
     preco = db.Column(db.Float, nullable=False)  # Preço do produto
     localizacao = db.Column(db.String(100), nullable=True)  # Localização do produto no estoque
-    criado_em = db.Column(db.DateTime, default=datetime.utcnow)  # Data de criação do registro
-    atualizado_em = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)  # Data de última atualização
+    criado_em = db.Column(db.DateTime, default=get_brasilia_time)  # Data de criação do registro
+    atualizado_em = db.Column(db.DateTime, default=get_brasilia_time, onupdate=get_brasilia_time)  # Data de última atualização
 
     # Relacionamento com MovimentacaoEstoque
     movimentacoes = db.relationship(
@@ -65,12 +75,12 @@ class Produto(db.Model):
 # Modelo MovimentacaoEstoque
 class MovimentacaoEstoque(db.Model):
     __tablename__ = 'movimentacoes_estoque'
-    
+
     id = db.Column(db.Integer, primary_key=True)
     produto_id = db.Column(db.Integer, db.ForeignKey('produtos.id', ondelete='CASCADE'), nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
     tipo = db.Column(db.String(10), nullable=False)  # Pode ser 'entrada' ou 'saida'
-    data = db.Column(db.DateTime, default=datetime.utcnow)
+    data = db.Column(db.DateTime, default=get_brasilia_time)
 
     def __repr__(self):
         return f'<MovimentacaoEstoque {self.tipo} produto {self.produto.nome if self.produto else "N/A"} em {self.data}>'
