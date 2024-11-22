@@ -17,9 +17,10 @@ cd gerenciador-estoque-kazzamotos/
 3. Instalando as Dependências  
 No Terminal Bash:  
 pip install flask_sqlalchemy  
-pip install flask-wtf    
+pip install flask-wtf
+pip install pytz  
   
-4. Executando a Aplicação no Terminal Bash:   
+5. Executando a Aplicação no Terminal Bash:   
 python app.py
 
 O servidor estará disponível em http://127.0.0.1:5000  
