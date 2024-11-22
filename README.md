@@ -19,6 +19,8 @@ No Terminal Bash:
 pip install flask_sqlalchemy  
 pip install flask-wtf    
   
-4. Executando a Aplicação
-No Terminal Bash:  
-python app.py  
+4. Executando a Aplicação no Terminal Bash:   
+python app.py
+
+O servidor estará disponível em http://127.0.0.1:5000  
+Abra seu navegador e acesse http://127.0.0.1:5000 para começar a usar o sistema.  
