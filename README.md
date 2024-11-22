@@ -17,7 +17,7 @@ cd gerenciador-estoque-kazzamotos/
 3. Instalando as Dependências  
 No Terminal Bash:  
 pip install flask_sqlalchemy  
-pip install flask-wtf
+pip install flask-wtf  
 pip install pytz  
   
 5. Executando a Aplicação no Terminal Bash:   
