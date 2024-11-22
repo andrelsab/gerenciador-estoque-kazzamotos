@@ -1,8 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-
-
 # Inicializa o objeto de banco de dados
 db = SQLAlchemy()
 
@@ -22,6 +20,14 @@ class Produto(db.Model):
     localizacao = db.Column(db.String(100), nullable=True)  # Localização do produto no estoque
     criado_em = db.Column(db.DateTime, default=datetime.utcnow)  # Data de criação do registro
     atualizado_em = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)  # Data de última atualização
+
+    # Relacionamento com MovimentacaoEstoque
+    movimentacoes = db.relationship(
+        'MovimentacaoEstoque',
+        backref='produto',
+        lazy=True,
+        cascade="all, delete-orphan"  # Permite a exclusão em cascata
+    )
 
     def __repr__(self):
         """Representação legível do objeto Produto."""
@@ -61,14 +67,13 @@ class MovimentacaoEstoque(db.Model):
     __tablename__ = 'movimentacoes_estoque'
     
     id = db.Column(db.Integer, primary_key=True)
-    produto_id = db.Column(db.Integer, db.ForeignKey('produtos.id'), nullable=False)
-    produto = db.relationship('Produto', backref='movimentacoes', lazy=True)  # Definindo a relação com Produto
+    produto_id = db.Column(db.Integer, db.ForeignKey('produtos.id', ondelete='CASCADE'), nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
     tipo = db.Column(db.String(10), nullable=False)  # Pode ser 'entrada' ou 'saida'
     data = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return f'<MovimentacaoEstoque {self.tipo} produto {self.produto.nome} em {self.data}>'
+        return f'<MovimentacaoEstoque {self.tipo} produto {self.produto.nome if self.produto else "N/A"} em {self.data}>'
 
     # Método para converter o objeto em dicionário (útil para APIs)
     def to_dict(self):
