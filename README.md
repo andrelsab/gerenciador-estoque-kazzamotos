@@ -19,6 +19,6 @@ No Terminal Bash:
 pip install flask_sqlalchemy  
 pip install flask-wtf    
   
-4. Executando a Aplicação   
-Para rodar a aplicação, vá até a pasta app e execute o seguinte comando no terminal:    
+4. Executando a Aplicação
+No Terminal Bash:  
 python app.py  
