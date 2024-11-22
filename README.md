@@ -12,12 +12,15 @@ WTForms: Biblioteca para gerenciamento de formulários.
 Rodar o Projeto
 1. Clonando o Repositório
 git clone https://github.com/seu-usuario/gerenciador-estoque.git
-cd gerenciador-estoque
+cd gerenciador-estoque-kazzamotos/
+cd app/
 
-2. Instalando as Dependências
-pip install
+3. Instalando as Dependências
+pip install flask_sqlalchemy
+pip install flask-wtf
+python app.py
 
-3. Executando a Aplicação
+4. Executando a Aplicação
 Para rodar a aplicação, vá até a pasta app e execute o seguinte comando no terminal:
 cd app
 python app.py
